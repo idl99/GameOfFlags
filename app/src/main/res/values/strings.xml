@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">GameOfFlags</string>
+    <string name="app_name">Game Of Flags</string>
+    <string name="guess_country_label_text">Guess the Country</string>
+    <string name="guess_hints_label_text">Guess Hints</string>
+    <string name="guess_flag_label_text">Guess the Flag</string>
+    <string name="advanced_level_label_text">Advanced Level</string>
+    <string name="timer_switch_text">Timer</string>
+    <string name="submit">Submit</string>
+    <string name="image_view_flag_content_description">Flag of Country</string>
+    <string name="advanced_level">Advanced Level</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="result">Result</string>
+    <string name="next">Next</string>
+    <string name="cancel">Cancel</string>
+    <string name="hint_enter_country_name">Enter name of Country</string>
+    <string name="guess_hint">Guess Hint</string>
+    <string name="guess">Guess</string>
 </resources>

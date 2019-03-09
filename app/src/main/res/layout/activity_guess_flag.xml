@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".GuessFlagActivity">
+
+    <TextView
+        android:id="@+id/tv_guess_flag_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/guess_flag_label_text"
+        android:textAppearance="@style/AppTheme.GameModeTitle" />
+
+    <ImageView
+        android:id="@+id/guessflag_imageview_flag1"
+        style="@style/AppTheme.FlagLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/lk" />
+
+    <ImageView
+        android:id="@+id/guessflag_imageview_flag2"
+        style="@style/AppTheme.FlagLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/lk" />
+
+    <ImageView
+        android:id="@+id/guessflag_imageview_flag3"
+        style="@style/AppTheme.FlagLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/lk" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:clickable="false"
+        android:text="Next" />
+
+
+</LinearLayout>

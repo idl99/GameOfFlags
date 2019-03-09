@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.ihandilnath.gameofflags">
 
     <application
@@ -8,14 +9,30 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning"
+        android:configChanges="orientation">
+
+        <activity android:name=".AdvancedLevelActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".GuessCountryActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".GuessHintsActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".GuessFlagActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
