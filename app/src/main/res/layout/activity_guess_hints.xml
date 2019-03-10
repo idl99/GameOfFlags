@@ -5,32 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".GuessHintsActivity">
-
-    <ProgressBar
-        android:id="@+id/guesshint_pb_timer"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:progress="0"
-        android:scaleY="8"
-        android:visibility="invisible" />
-
-    <TextView
-        android:id="@+id/guesshint_tv_timer"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:text="TIME LEFT: 10s"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:visibility="invisible" />
+    tools:context=".guesshints.GuessHintsActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_centerInParent="true">
 
         <LinearLayout
@@ -38,6 +17,31 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ProgressBar
+                    android:id="@+id/guesshint_pb_timer"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:progress="0"
+                    android:scaleY="8"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/guesshint_tv_timer"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:text="TIME LEFT: 10s"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:visibility="invisible" />
+
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/guesshint_tv_gamemodetitle"
@@ -89,7 +93,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Letter"
                     android:inputType="textPersonName"
                     android:maxLength="1"
                     android:minEms="1" />
@@ -120,7 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/colorPrimary" />
 
         </LinearLayout>
 

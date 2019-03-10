@@ -36,17 +36,13 @@ public class GameTimer extends Timer {
     class GameTimerTask extends TimerTask{
         @Override
         public void run() {
-            ((Activity)GameTimer.this.subscriber).runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    GameTimer.this.timeElapsed++;
-                    subscriber.onTimeElapsed(GameTimer.this.timeElapsed);
-                    if(GameTimer.this.timeElapsed == 10){
-                        subscriber.onTimeExpired();
-                    }
-                }
-            });
+            GameTimer.this.timeElapsed++;
+            subscriber.onTimeElapsed(timeElapsed);
+            if(timeElapsed == 10){
+                subscriber.onTimeExpired();
+            }
         }
     }
+
 
 }

@@ -19,10 +19,10 @@
         <activity android:name=".GuessCountryActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".GuessHintsActivity"
+        <activity android:name=".guesshints.GuessHintsActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".GuessFlagActivity"
+        <activity android:name=".guessflag.GuessFlagActivity"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".MainActivity"
