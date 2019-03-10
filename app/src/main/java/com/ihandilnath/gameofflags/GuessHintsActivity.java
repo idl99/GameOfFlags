@@ -13,43 +13,41 @@ import android.widget.TextView;
 import org.json.JSONException;
 
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
-public class GuessHintsActivity extends AppCompatActivity {
+public class GuessHintsActivity extends AppCompatActivity implements TimeableMode {
+
+    private boolean mIsTimed;
 
     private Country mCurrent;
     private CountryRepository mCountryRepo;
-    private Timer timer;
-    private int mTimeElapsed;
+    private GameTimer timer;
 
     private String mUserGuess;
     private int mNoOfIncorrectGuesses;
-    private boolean mIsTimed;
+
+    private ProgressBar mTimerProgressBar;
+    private TextView mTimerText;
 
     private TextView mTvHint;
     private EditText mEtGuess;
-    private TextView mTvGuessesRemaining;
     private Button mButtonGuess;
+    private TextView mTvGuessesRemaining;
+
     private TextView mTvResult;
     private TextView mTvCorrectAnswer;
-    private ProgressBar mTimerProgressBar;
-    private TextView mTimerText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guess_hints);
 
-        mTvHint = findViewById(R.id.guesshint_tv_hint);
-        mEtGuess = findViewById(R.id.guesshint_et_guess);
-        mTvGuessesRemaining = findViewById(R.id.guess_hint_tv_guesses_remaining);
-        mButtonGuess = findViewById(R.id.guesshint_button_guess);
-        mTvResult = findViewById(R.id.guesshint_tv_result);
-        mTvCorrectAnswer = findViewById(R.id.guesshint_tv_correct_answer);
         mTimerProgressBar = findViewById(R.id.guesshint_pb_timer);
         mTimerText = findViewById(R.id.guesshint_tv_timer);
 
+        mTvHint = findViewById(R.id.guesshint_tv_hint);
+        mEtGuess = findViewById(R.id.guesshint_et_guess);
+
+        mButtonGuess = findViewById(R.id.guesshint_button_submit);
         mButtonGuess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +55,12 @@ public class GuessHintsActivity extends AppCompatActivity {
             }
         });
 
+        mTvGuessesRemaining = findViewById(R.id.guess_hint_tv_guesses_remaining);
         mTvGuessesRemaining.setText(String.format("Guesses Remaining: 3/3"));
+
+        mTvResult = findViewById(R.id.guesshint_tv_result);
+        mTvCorrectAnswer = findViewById(R.id.guesshint_tv_correct_answer);
+
 
         try {
             mCountryRepo = CountryRepository.getInstance(this);
@@ -107,15 +110,17 @@ public class GuessHintsActivity extends AppCompatActivity {
 
         if(!guessedCorrect){
             mNoOfIncorrectGuesses ++;
-            mTvGuessesRemaining.setText(String.format("Guesses Remaining: %d / 3",3 - mNoOfIncorrectGuesses));
+            mTvGuessesRemaining.setText(String.format("Guesses Remaining: %d/3",3 - mNoOfIncorrectGuesses));
         }
 
         if(mUserGuess.equals(mCurrent.getName().toLowerCase()) || mNoOfIncorrectGuesses == 3){
-            resetTimer();
+            if(timer != null)
+                timer.stopTimer();
             toggleSubmitButton();
             showResult();
         } else {
-            resetTimer();
+            if(timer != null)
+                timer.stopTimer();
             showTimerIfTimed();
         }
 
@@ -136,35 +141,6 @@ public class GuessHintsActivity extends AppCompatActivity {
         setup();
     }
 
-    private void runTimer(){
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mTimeElapsed++;
-                        mTimerText.setText(String.format("TIME LEFT: %ds",10 - mTimeElapsed));
-                        mTimerProgressBar.setProgress((int)((mTimeElapsed/10.0)*100.0));
-                        if(10 - mTimeElapsed == 0){
-                            guess();
-                        }
-                    }
-                });
-            }
-        },0,1000);
-    }
-
-    private void resetTimer(){
-        if (timer != null) {
-            timer.cancel();
-            timer.purge();
-            timer = null;
-            mTimeElapsed = 0;
-        }
-    }
-
     private void showResult(){
         if(mUserGuess.toLowerCase().equals(mCurrent.getName().toLowerCase())){
             mTvResult.setText("Your answer is correct");
@@ -183,7 +159,7 @@ public class GuessHintsActivity extends AppCompatActivity {
 
     private void toggleSubmitButton(){
         switch (mButtonGuess.getText().toString()){
-            case "Guess":
+            case "Submit":
                 mButtonGuess.setText("Next");
                 mButtonGuess.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -193,7 +169,7 @@ public class GuessHintsActivity extends AppCompatActivity {
                 });
                 break;
             case "Next":
-                mButtonGuess.setText("Guess");
+                mButtonGuess.setText("Submit");
                 mButtonGuess.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -209,9 +185,19 @@ public class GuessHintsActivity extends AppCompatActivity {
         if(mIsTimed){
             mTimerProgressBar.setVisibility(View.VISIBLE);
             mTimerText.setVisibility(View.VISIBLE);
-            runTimer();
+            timer = new GameTimer(this);
+            timer.startTimer();
         }
     }
 
+    @Override
+    public void onTimeExpired() {
+        guess();
+    }
 
+    @Override
+    public void onTimeElapsed(int timeElapsed) {
+        mTimerText.setText(String.format("TIME LEFT: %ds",10 - timeElapsed));
+        mTimerProgressBar.setProgress((int)((timeElapsed/10.0)*100.0));
+    }
 }

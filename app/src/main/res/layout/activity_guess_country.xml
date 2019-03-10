@@ -23,7 +23,7 @@
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:text="TIME LEFT: 30s"
+        android:text="TIME LEFT: 10s"
         android:textColor="@android:color/black"
         android:textStyle="bold"
         android:visibility="invisible" />
