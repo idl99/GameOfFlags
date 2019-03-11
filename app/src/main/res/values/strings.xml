@@ -15,4 +15,5 @@
     <string name="cancel">Cancel</string>
     <string name="hint_enter_country_name">Enter name of Country</string>
     <string name="guess_hint">Guess Hint</string>
+    <string name="initial_points_indicator">Points: 0/3</string>
 </resources>

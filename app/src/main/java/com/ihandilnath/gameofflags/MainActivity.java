@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Switch;
 
+import com.ihandilnath.gameofflags.advancedlevel.AdvancedLevelActivity;
 import com.ihandilnath.gameofflags.guessflag.GuessFlagActivity;
 import com.ihandilnath.gameofflags.guesshints.GuessHintsActivity;
 

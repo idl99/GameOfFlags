@@ -33,6 +33,12 @@ public class Country implements Serializable {
         return super.equals(obj) || this.name.equalsIgnoreCase(((Country)obj).getName());
     }
 
-
+    public static String[] getCountryNamesAsArray(Country[] countries){
+        String[] countryNames = new String[countries.length];
+        for(int i=0; i<countries.length; i++){
+            countryNames[i] =  countries[i].getName();
+        }
+        return countryNames;
+    }
 
 }

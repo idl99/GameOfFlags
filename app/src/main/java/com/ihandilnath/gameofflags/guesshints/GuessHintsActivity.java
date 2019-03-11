@@ -21,7 +21,7 @@ public class GuessHintsActivity extends AppCompatActivity {
 
     private TextView mTvHint;
     private EditText mEtGuess;
-    private Button mButtonGuess;
+    private Button mSubmitButton;
     private TextView mTvGuessesRemaining;
 
     private TextView mTvResult;
@@ -39,8 +39,8 @@ public class GuessHintsActivity extends AppCompatActivity {
         mTimerText = findViewById(R.id.guesshint_tv_timer);
         mTvHint = findViewById(R.id.guesshint_tv_hint);
         mEtGuess = findViewById(R.id.guesshint_et_guess);
-        mButtonGuess = findViewById(R.id.guesshint_button_submit);
-        mButtonGuess.setOnClickListener(view -> controller.guess());
+        mSubmitButton = findViewById(R.id.guesshint_button_submit);
+        mSubmitButton.setOnClickListener(view -> controller.guess());
         mTvGuessesRemaining = findViewById(R.id.guess_hint_tv_guesses_remaining);
         mTvResult = findViewById(R.id.guesshint_tv_result);
         mTvCorrectAnswer = findViewById(R.id.guesshint_tv_correct_answer);
@@ -83,17 +83,15 @@ public class GuessHintsActivity extends AppCompatActivity {
     }
 
     public void toggleSubmitButton(){
-
-        switch (mButtonGuess.getText().toString()){
+        switch (mSubmitButton.getText().toString()){
             case "Submit":
-                mButtonGuess.setText("Next");
-                mButtonGuess.setOnClickListener(view -> controller.next());
+                mSubmitButton.setText("Next");
+                mSubmitButton.setOnClickListener(view -> controller.next());
                 break;
             case "Next":
-                mButtonGuess.setText("Submit");
-                mButtonGuess.setOnClickListener(view -> controller.guess());
+                mSubmitButton.setText("Submit");
+                mSubmitButton.setOnClickListener(view -> controller.guess());
                 break;
-
         }
     }
 

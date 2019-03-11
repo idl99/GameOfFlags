@@ -36,11 +36,6 @@ public class GuessCountryActivity extends AppCompatActivity {
     private Timer timer;
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -54,12 +49,7 @@ public class GuessCountryActivity extends AppCompatActivity {
         mTvAnswer = findViewById(R.id.guesscountry_tv_correct_answer);
 
 
-        mSubmitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                submit();
-            }
-        });
+        mSubmitButton.setOnClickListener(view -> submit());
 
         try {
             countryRepository = CountryRepository.getInstance(this);
@@ -88,7 +78,7 @@ public class GuessCountryActivity extends AppCompatActivity {
 
     private void populateCountries() {
         mCountrySpinner = findViewById(R.id.guesscountry_spinner_countries);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_spinner_item, countryRepository.getAllCountryNames());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mCountrySpinner.setAdapter(adapter);
@@ -113,7 +103,7 @@ public class GuessCountryActivity extends AppCompatActivity {
         resetTimer();
 
         String userAnswer = ((String)mCountrySpinner.getSelectedItem());
-        if(mCountrySpinner.getSelectedItem().equals(country.getName())){
+        if(userAnswer.equals(country.getName())){
             mTvResult.setText("Your answer is correct");
             mTvResult.setTextColor(getResources().getColor(android.R.color.holo_green_light));
         } else {
@@ -132,7 +122,7 @@ public class GuessCountryActivity extends AppCompatActivity {
         showTimerIfTimed();
     }
 
-    public void next(){
+    private void next(){
         toggleSubmitButton();
         clearResult();
         country = countryRepository.getRandomCountry();
@@ -144,15 +134,12 @@ public class GuessCountryActivity extends AppCompatActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mTimeElapsed++;
-                        mTimerText.setText(String.format("TIME LEFT: %ds",10 - mTimeElapsed));
-                        mTimerProgressBar.setProgress((int)((mTimeElapsed/10.0)*100.0));
-                        if(10 - mTimeElapsed == 0){
-                            submit();
-                        }
+                runOnUiThread(() -> {
+                    mTimeElapsed++;
+                    mTimerText.setText(String.format("TIME LEFT: %ds",10 - mTimeElapsed));
+                    mTimerProgressBar.setProgress((int)((mTimeElapsed/10.0)*100.0));
+                    if(10 - mTimeElapsed == 0){
+                        submit();
                     }
                 });
             }
@@ -176,21 +163,11 @@ public class GuessCountryActivity extends AppCompatActivity {
         switch (mSubmitButton.getText().toString()){
             case "Submit":
                 mSubmitButton.setText("Next");
-                mSubmitButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        next();
-                    }
-                });
+                mSubmitButton.setOnClickListener(view -> next());
                 break;
             case "Next":
                 mSubmitButton.setText("Submit");
-                mSubmitButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        submit();
-                    }
-                });
+                mSubmitButton.setOnClickListener(view -> submit());
                 break;
 
         }

@@ -11,16 +11,16 @@ import java.io.IOException;
 
 public class GuessHintsController implements TimeableMode {
 
-    private boolean isTimed;
+    private final boolean isTimed;
     private GameTimer gameTimer;
 
-    private GuessHintsActivity gameView;
+    private final GuessHintsActivity gameView;
 
     private CountryRepository countryRepository;
     private Country answer;
 
     private String guessString;
-    private int guessesRemaining = 3;
+    private int guessesRemaining;
 
     public GuessHintsController(GuessHintsActivity gameView, boolean isTimed) {
         this.gameView = gameView;
@@ -94,7 +94,7 @@ public class GuessHintsController implements TimeableMode {
 
     @Override
     public void onTimeExpired() {
-        gameView.runOnUiThread(()-> guess());
+        gameView.runOnUiThread(this::guess);
     }
 
     @Override

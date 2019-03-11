@@ -14,10 +14,10 @@ import java.util.Random;
 
 public class GuessFlagController implements TimeableMode {
 
-    private boolean isTimed;
+    private final boolean isTimed;
     private GameTimer gameTimer;
 
-    private GuessFlagActivity gameView;
+    private final GuessFlagActivity gameView;
 
     private CountryRepository countryRepository;
     private Country[] options = new Country[3];

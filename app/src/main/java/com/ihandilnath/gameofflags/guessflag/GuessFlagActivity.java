@@ -19,7 +19,6 @@ public class GuessFlagActivity extends AppCompatActivity {
     private ImageView[] mFlags;
     private TextView mResultTextView;
     private TextView mQuestionLabelTextView;
-    private Button mNextButton;
     private ProgressBar mTimerProgressBar;
     private TextView mTimerText;
 
@@ -35,7 +34,7 @@ public class GuessFlagActivity extends AppCompatActivity {
 
         mResultTextView = findViewById(R.id.guessflag_tv_result);
         mQuestionLabelTextView = findViewById(R.id.guessflag_question_label);
-        mNextButton = findViewById(R.id.guessflag_next);
+        Button mNextButton = findViewById(R.id.guessflag_next);
         mNextButton.setOnClickListener(view -> gameController.next());
         mTimerProgressBar = findViewById(R.id.guessflag_pb_timer);
         mTimerText = findViewById(R.id.guessflag_tv_timer);

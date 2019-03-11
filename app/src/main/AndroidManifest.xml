@@ -13,7 +13,7 @@
         tools:ignore="GoogleAppIndexingWarning"
         android:configChanges="orientation">
 
-        <activity android:name=".AdvancedLevelActivity"
+        <activity android:name=".advancedlevel.AdvancedLevelActivity"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".GuessCountryActivity"
