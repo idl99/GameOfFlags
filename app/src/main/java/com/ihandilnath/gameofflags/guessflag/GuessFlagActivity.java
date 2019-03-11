@@ -35,7 +35,7 @@ public class GuessFlagActivity extends AppCompatActivity {
         mResultTextView = findViewById(R.id.guessflag_tv_result);
         mQuestionLabelTextView = findViewById(R.id.guessflag_question_label);
         Button mNextButton = findViewById(R.id.guessflag_next);
-        mNextButton.setOnClickListener(view -> gameController.next());
+        mNextButton.setOnClickListener(view -> recreate());
         mTimerProgressBar = findViewById(R.id.guessflag_pb_timer);
         mTimerText = findViewById(R.id.guessflag_tv_timer);
 
@@ -50,11 +50,6 @@ public class GuessFlagActivity extends AppCompatActivity {
         for(int i=0; i<flags.length; i++){
             mFlags[i].setImageDrawable(flags[i]);
         }
-    }
-
-    public void clearResult() {
-        mResultTextView.setText("");
-        mQuestionLabelTextView.setText("");
     }
 
     public void updateTimer(int timeElapsed) {

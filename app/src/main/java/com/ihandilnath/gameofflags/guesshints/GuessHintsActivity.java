@@ -76,17 +76,11 @@ public class GuessHintsActivity extends AppCompatActivity {
         mTvHint.setText(hintText);
     }
 
-    public void resetView(){
-        mTvResult.setText("");
-        mTvCorrectAnswer.setText("");
-        mTvGuessesRemaining.setText("Guesses Remaining: 3/3");
-    }
-
     public void toggleSubmitButton(){
         switch (mSubmitButton.getText().toString()){
             case "Submit":
                 mSubmitButton.setText("Next");
-                mSubmitButton.setOnClickListener(view -> controller.next());
+                mSubmitButton.setOnClickListener(view -> recreate());
                 break;
             case "Next":
                 mSubmitButton.setText("Submit");

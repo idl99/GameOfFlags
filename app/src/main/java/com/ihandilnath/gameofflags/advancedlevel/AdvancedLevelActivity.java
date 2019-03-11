@@ -102,19 +102,12 @@ public class AdvancedLevelActivity extends AppCompatActivity {
         switch (mSubmitButton.getText().toString()){
             case "Submit":
                 mSubmitButton.setText("Next");
-                mSubmitButton.setOnClickListener(view -> gameController.next());
+                mSubmitButton.setOnClickListener(view -> recreate());
                 break;
             case "Next":
                 mSubmitButton.setText("Submit");
                 mSubmitButton.setOnClickListener(view -> submitAnswers());
                 break;
-        }
-    }
-
-    public void resetView() {
-        recreate();
-        for(EditText editText: mInputFields){
-            editText.setText("");
         }
     }
 

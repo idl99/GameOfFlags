@@ -88,14 +88,10 @@ public class AdvancedLevelController implements TimeableMode {
                 gameTimer = new GameTimer(this);
                 gameTimer.startTimer();
             }
+        } else{
+            gameView.toggleSubmitButton();
         }
 
-    }
-
-
-    public void next(){
-        gameView.toggleSubmitButton();
-        gameView.resetView();
     }
 
     private boolean allAnsweredCorrect(){

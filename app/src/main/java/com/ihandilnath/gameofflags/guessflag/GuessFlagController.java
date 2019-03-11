@@ -57,7 +57,6 @@ public class GuessFlagController implements TimeableMode {
     }
 
     public void submit(int selected){
-
         if(gameTimer != null){
             gameTimer.stopTimer();
         }
@@ -69,12 +68,6 @@ public class GuessFlagController implements TimeableMode {
             // Answer is wrong
             gameView.showResult(false);
         }
-
-    }
-
-    public void next(){
-        gameView.clearResult();
-        setup();
     }
 
     @Override

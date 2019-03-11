@@ -85,13 +85,6 @@ public class GuessHintsController implements TimeableMode {
 
     }
 
-    public void next(){
-        gameView.toggleSubmitButton();
-        gameView.resetView();
-        guessesRemaining = 0;
-        setup();
-    }
-
     @Override
     public void onTimeExpired() {
         gameView.runOnUiThread(this::guess);
