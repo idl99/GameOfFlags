@@ -38,15 +38,15 @@ public class AdvancedLevelActivity extends AppCompatActivity {
         mGameController = new AdvancedLevelController(this,getIntent().getExtras().getBoolean("timer"));
 
         // Creating required references to UI elements
-        mInputFields = new EditText[]{findViewById(R.id.advancedlevel_et_input1),
-                findViewById(R.id.advancedlevel_et_input2), findViewById(R.id.advancedlevel_et_input3)};
+        mInputFields = new EditText[]{findViewById(R.id.advancedlevel_edittext_input1),
+                findViewById(R.id.advancedlevel_edittext_input2), findViewById(R.id.advancedlevel_edittext_input3)};
         mSubmitButton = findViewById(R.id.advancedlevel_button_submit);
         mSubmitButton.setOnClickListener(view -> submitAnswers());
-        mFlagImageViews = new ImageView[]{findViewById(R.id.advancedlevel_image_flag_1),
-                findViewById(R.id.advancedlevel_image_flag_2), findViewById(R.id.advancedlevel_image_flag_3)};
-        mTimerProgressBar = findViewById(R.id.advancedlevel_pb_timer);
-        mTimerText = findViewById(R.id.advancedlevel_tv_timer);
-        mPointTallyText = findViewById(R.id.advancedlevel_tv_point_tally);
+        mFlagImageViews = new ImageView[]{findViewById(R.id.advancedlevel_image_flag1),
+                findViewById(R.id.advancedlevel_image_flag2), findViewById(R.id.advancedlevel_image_flag3)};
+        mTimerProgressBar = findViewById(R.id.advancedlevel_progressbar_timer);
+        mTimerText = findViewById(R.id.advancedlevel_text_timer);
+        mPointTallyText = findViewById(R.id.advancedlevel_text_pointtally);
 
         mGameController.setup();
 

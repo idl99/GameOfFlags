@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void startGameMode(View view) {
 
-        Switch mSwitchTimer = findViewById(R.id.switch_timer);
+        Switch mSwitchTimer = findViewById(R.id.home_switch_timer);
         int selectedGameMode = view.getId(); // Getting the ID of the button corresponding
                                             // to the game mode selected by the user
 
@@ -38,19 +38,19 @@ public class MainActivity extends AppCompatActivity {
 
         switch(selectedGameMode){
             // Checking which button user clicked on
-            case R.id.button_guess_country:
+            case R.id.home_button_guesscountry:
                 // User wishes to enter "Guess the Country" game mode
                 intent = new Intent(this, GuessCountryActivity.class);
                 break;
-            case R.id.button_guess_hints:
+            case R.id.home_button_guesshints:
                 // User wishes to enter "Guess Hints" game mode
                 intent = new Intent(this, GuessHintsActivity.class);
                 break;
-            case R.id.button_guess_flag:
+            case R.id.home_button_guessflag:
                 // User wishes to enter "Guess the Flag" game mode
                 intent = new Intent(this, GuessFlagActivity.class);
                 break;
-            case R.id.button_advanced_level:
+            case R.id.home_button_advancedlevel:
                 // User wishes to enter "Advanced level" game mode
                 intent = new Intent(this, AdvancedLevelActivity.class);
                 break;

@@ -42,15 +42,15 @@ public class GuessHintsActivity extends AppCompatActivity {
                 getIntent().getExtras().getBoolean("timer"));
 
         // Creating references to UI elements
-        mTimerProgressBar = findViewById(R.id.guesshint_pb_timer);
-        mTimerText = findViewById(R.id.guesshint_tv_timer);
-        mHintText = findViewById(R.id.guesshint_tv_hint);
-        mGuessEditText = findViewById(R.id.guesshint_et_guess);
+        mTimerProgressBar = findViewById(R.id.guesshint_progressbar_timer);
+        mTimerText = findViewById(R.id.guesshint_text_timer);
+        mHintText = findViewById(R.id.guesshint_text_hint);
+        mGuessEditText = findViewById(R.id.guesshint_edittext_guess);
         mSubmitButton = findViewById(R.id.guesshint_button_submit);
         mSubmitButton.setOnClickListener(view -> mGameController.checkGuess());
-        mGuessesRemainingText = findViewById(R.id.guess_hint_tv_guesses_remaining);
-        mResultText = findViewById(R.id.guesshint_tv_result);
-        mCorrectAnswerText = findViewById(R.id.guesshint_tv_correct_answer);
+        mGuessesRemainingText = findViewById(R.id.guesshint_text_guessesremaining);
+        mResultText = findViewById(R.id.guesshint_text_result);
+        mCorrectAnswerText = findViewById(R.id.guesshint_text_correctanswer);
 
         mGameController.setup();
 

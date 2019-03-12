@@ -25,7 +25,7 @@ public class GuessHintsController implements CanTime {
     // like their name and corresponding drawable resource for country flag image
     private Country mRandomlySelectedCountry;
     private String mUserGuess;
-    private int mAttemptsLeft;
+    private int mGuessesRemaining;
 
     /**
      * Controller constructor
@@ -66,13 +66,13 @@ public class GuessHintsController implements CanTime {
      */
     public void setup(){
 
-        mAttemptsLeft = 3;
+        mGuessesRemaining = 3;
         mRandomlySelectedCountry = mCountryRepository.getRandomCountry();
         mUserGuess = mRandomlySelectedCountry.getName().replaceAll("\\S","-");
 
         mGameView.setFlag(mCountryRepository.getFlagForCountry(mRandomlySelectedCountry));
         mGameView.setHint(mUserGuess);
-        mGameView.setGuessesRemaining(mAttemptsLeft);
+        mGameView.setGuessesRemaining(mGuessesRemaining);
 
         if(mIsTimed){
             mGameView.showTimer();
@@ -107,11 +107,11 @@ public class GuessHintsController implements CanTime {
 
         if(!guessedCorrect){
             // User hasn't correctly guessed a letter
-            mAttemptsLeft--;
-            mGameView.setGuessesRemaining(mAttemptsLeft);
+            mGuessesRemaining--;
+            mGameView.setGuessesRemaining(mGuessesRemaining);
         }
 
-        if(mUserGuess.equals(mRandomlySelectedCountry.getName().toLowerCase()) || mAttemptsLeft == 0){
+        if(mUserGuess.equals(mRandomlySelectedCountry.getName().toLowerCase()) || mGuessesRemaining == 0){
             // User has solved the hints and provided answer or run out of attempts
             mGameView.toggleSubmitButton();
             mGameView.showResult(mUserGuess.equals(mRandomlySelectedCountry.getName().toLowerCase()), mRandomlySelectedCountry.getName());

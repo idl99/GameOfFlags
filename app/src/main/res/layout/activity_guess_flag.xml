@@ -25,7 +25,7 @@
                 android:layout_height="match_parent">
 
                 <ProgressBar
-                    android:id="@+id/guessflag_pb_timer"
+                    android:id="@+id/guessflag_progressbar_timer"
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -34,7 +34,7 @@
                     android:visibility="invisible" />
 
                 <TextView
-                    android:id="@+id/guessflag_tv_timer"
+                    android:id="@+id/guessflag_text_timer"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:gravity="center"
@@ -46,7 +46,7 @@
             </FrameLayout>
 
             <TextView
-                android:id="@+id/tv_guess_flag_title"
+                android:id="@+id/guessflag_text_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -56,14 +56,14 @@
                 android:textAppearance="@style/AppTheme.GameModeTitle" />
 
             <TextView
-                android:id="@+id/guessflag_question_label"
+                android:id="@+id/guessflag_text_questionlabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp" />
 
             <TextView
-                android:id="@+id/guessflag_tv_result"
+                android:id="@+id/guessflag_text_result"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -71,7 +71,7 @@
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/guessflag_imageview_flag1"
+                android:id="@+id/guessflag_image_flag1"
                 style="@style/AppTheme.FlagLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
                 android:contentDescription="@string/flag_1" />
 
             <ImageView
-                android:id="@+id/guessflag_imageview_flag2"
+                android:id="@+id/guessflag_image_flag2"
                 style="@style/AppTheme.FlagLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
                 android:contentDescription="@string/flag_2" />
 
             <ImageView
-                android:id="@+id/guessflag_imageview_flag3"
+                android:id="@+id/guessflag_image_flag3"
                 style="@style/AppTheme.FlagLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

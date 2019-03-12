@@ -43,11 +43,11 @@ public class GuessCountryActivity extends AppCompatActivity {
         mGameController = new GuessCountryController(this, getIntent().getExtras().getBoolean("timer"));
 
         // Creating references to UI elements
-        mTimerProgressBar = findViewById(R.id.guesscountry_pb_timer);
-        mTimerText = findViewById(R.id.guesscountry_tv_timer);
+        mTimerProgressBar = findViewById(R.id.guesscountry_progressbar_timer);
+        mTimerText = findViewById(R.id.guesscountry_text_timer);
         mSubmitButton = findViewById(R.id.guesscountry_button_submit);
-        mResultText = findViewById(R.id.guesscountry_tv_result);
-        mAnswerText = findViewById(R.id.guesscountry_tv_correct_answer);
+        mResultText = findViewById(R.id.guesscountry_text_result);
+        mAnswerText = findViewById(R.id.guesscountry_text_correct_answer);
         mSubmitButton.setOnClickListener(view -> submitAnswer());
 
         mGameController.setup();

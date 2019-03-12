@@ -37,18 +37,18 @@ public class GuessFlagActivity extends AppCompatActivity {
                 getIntent().getExtras().getBoolean("timer"));
 
         // Creating references to UI elements
-        mFlagImages = new ImageView[]{findViewById(R.id.guessflag_imageview_flag1),
-                findViewById(R.id.guessflag_imageview_flag2),
-                findViewById(R.id.guessflag_imageview_flag3)};
+        mFlagImages = new ImageView[]{findViewById(R.id.guessflag_image_flag1),
+                findViewById(R.id.guessflag_image_flag2),
+                findViewById(R.id.guessflag_image_flag3)};
 
-        mResultText = findViewById(R.id.guessflag_tv_result);
-        mQuestionLabelText = findViewById(R.id.guessflag_question_label);
+        mResultText = findViewById(R.id.guessflag_text_result);
+        mQuestionLabelText = findViewById(R.id.guessflag_text_questionlabel);
 
         Button mNextButton = findViewById(R.id.guessflag_next);
         mNextButton.setOnClickListener(view -> recreate());
 
-        mTimerProgressBar = findViewById(R.id.guessflag_pb_timer);
-        mTimerText = findViewById(R.id.guessflag_tv_timer);
+        mTimerProgressBar = findViewById(R.id.guessflag_progressbar_timer);
+        mTimerText = findViewById(R.id.guessflag_text_timer);
 
         mGameController.setup();
 
@@ -71,13 +71,13 @@ public class GuessFlagActivity extends AppCompatActivity {
      */
     public void flagClicked(View view) {
         switch(view.getId()){
-            case R.id.guessflag_imageview_flag1:
+            case R.id.guessflag_image_flag1:
                 mGameController.checkAnswer(0);
                 break;
-            case R.id.guessflag_imageview_flag2:
+            case R.id.guessflag_image_flag2:
                 mGameController.checkAnswer(1);
                 break;
-            case R.id.guessflag_imageview_flag3:
+            case R.id.guessflag_image_flag3:
                 mGameController.checkAnswer(2);
                 break;
         }
