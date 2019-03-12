@@ -91,11 +91,11 @@
                     android:id="@+id/guesshint_et_guess"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:autofillHints=""
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:maxLength="1"
-                    android:minEms="1"
-                    android:autofillHints="" />
+                    android:minEms="1" />
 
             </LinearLayout>
 
@@ -117,14 +117,16 @@
                 android:id="@+id/guesshint_tv_result"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center" />
+                android:gravity="center"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/guesshint_tv_correct_answer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

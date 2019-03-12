@@ -74,7 +74,8 @@
                 android:id="@+id/guesscountry_tv_result"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center" />
+                android:gravity="center"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/guesscountry_tv_correct_answer"
