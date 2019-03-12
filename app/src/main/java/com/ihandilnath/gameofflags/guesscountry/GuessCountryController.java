@@ -9,61 +9,91 @@ import org.json.JSONException;
 
 import java.io.IOException;
 
+/**
+ * Class assigned single responsibility of performing game logic and controlling the view
+ * for Guess Country game mode
+ *
+ * Implements CanTime interface to provide methods implementing Timer behavior for
+ * Guess Country game mode on user request
+ */
 public class GuessCountryController implements CanTime {
 
-    private GuessCountryActivity gameView;
-    private boolean isTimed;
-    private GameTimer gameTimer;
+    private final GuessCountryActivity mGameView; // Reference to view controlled by the Game Controller
+    private final boolean mIsTimed; // boolean value indicating if the user has requested for timer
+    private GameTimer mGameTimer; // Timer object to keep track of time
+    private Country mRandomlySelectedCountry; // Array of randomly selected countries for game instance
+    private CountryRepository mCountryRepo; // Reference to country repository which provides details of countries
+                                            // like their name and corresponding drawable resource for country flag image
 
-    private Country answer;
-    private CountryRepository countryRepo;
-
+    /**
+     * Constructor controller
+     * @param gameView
+     * @param isTimed
+     */
     public GuessCountryController(GuessCountryActivity gameView, boolean isTimed) {
-        this.gameView = gameView;
-        this.isTimed = isTimed;
+        this.mGameView = gameView;
+        this.mIsTimed = isTimed;
         try {
-            countryRepo = CountryRepository.getInstance(gameView);
+            mCountryRepo = CountryRepository.getInstance(gameView);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public void setup(){
-        answer = countryRepo.getRandomCountry();
-
-        gameView.setFlag(countryRepo.getFlagForCountry(answer));
-        gameView.populateCountries(countryRepo.getAllCountryNames());
-
-        if(isTimed){
-            gameView.showTimer();
-            gameTimer = new GameTimer(this);
-            gameTimer.startTimer();
-        }
-
-    }
-
-    public void checkAnswer(String input){
-
-        if(gameTimer!=null){
-            gameTimer.stopTimer();
-        }
-
-        if(input.equals(answer.getName())){
-            gameView.showResult(true, "");
-        } else {
-            gameView.showResult(false, answer.getName());
-        }
-
-        gameView.toggleSubmitButton();
-    }
-
+    /**
+     * Implementing abstract onTimeExpired callback method declared in the CanTime interface
+     * for time expired event of Game Timer
+     */
     @Override
     public void onTimeExpired() {
-        gameView.runOnUiThread(()-> gameView.submitAnswer());
+        mGameView.runOnUiThread(()-> mGameView.submitAnswer());
     }
 
+    /**
+     * Implementing abstract onTimeElapsed callback method declared in the CanTime interface
+     * for time elapsed event of Game Timer
+     * @param timeElapsed - time elapsed in number of seconds
+     */
     @Override
     public void onTimeElapsed(int timeElapsed) {
-        gameView.runOnUiThread(() -> gameView.updateTimer(timeElapsed));
+        mGameView.runOnUiThread(() -> mGameView.updateTimer(timeElapsed));
     }
+
+    /**
+     * Method which sets up game logic and view for game instance
+     */
+    public void setup(){
+
+        mRandomlySelectedCountry = mCountryRepo.getRandomCountry();
+
+        mGameView.setFlag(mCountryRepo.getFlagForCountry(mRandomlySelectedCountry));
+        mGameView.populateCountries(mCountryRepo.getAllCountryNames());
+
+        if(mIsTimed){
+            mGameView.showTimer();
+            mGameTimer = new GameTimer(this);
+            mGameTimer.startTimer();
+        }
+
+    }
+
+    /**
+     * Method which checks the answer given by user
+     */
+    public void checkAnswer(String input){
+
+        if(mGameTimer !=null){
+            mGameTimer.stopTimer();
+        }
+
+        if(input.equals(mRandomlySelectedCountry.getName())){
+            mGameView.showResult(true, "");
+        } else {
+            mGameView.showResult(false, mRandomlySelectedCountry.getName());
+        }
+
+        mGameView.toggleSubmitButton();
+
+    }
+
 }

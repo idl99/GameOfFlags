@@ -12,56 +12,74 @@ import android.widget.TextView;
 
 import com.ihandilnath.gameofflags.R;
 
+/**
+ * Activity class for Advanced Level game mode which encapsulates logic related to manipulating
+ * the view.
+ */
 public class AdvancedLevelActivity extends AppCompatActivity {
 
-    private AdvancedLevelController gameController;
-
+    private AdvancedLevelController mGameController;
     private EditText[] mInputFields;
     private Button mSubmitButton;
     private ImageView[] mFlagImageViews;
     private ProgressBar mTimerProgressBar;
     private TextView mTimerText;
-    private TextView mPointTally;
+    private TextView mPointTallyText;
 
+    /**
+     * Android Lifecycle callback invoked when activity is first created
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advanced_level);
 
-        gameController = new AdvancedLevelController(this,
-                getIntent().getExtras().getBoolean("timer"));
+        mGameController = new AdvancedLevelController(this,getIntent().getExtras().getBoolean("timer"));
 
+        // Creating required references to UI elements
         mInputFields = new EditText[]{findViewById(R.id.advancedlevel_et_input1),
-                findViewById(R.id.advancedlevel_et_input2),
-                findViewById(R.id.advancedlevel_et_input3)};
-
+                findViewById(R.id.advancedlevel_et_input2), findViewById(R.id.advancedlevel_et_input3)};
         mSubmitButton = findViewById(R.id.advancedlevel_button_submit);
         mSubmitButton.setOnClickListener(view -> submitAnswers());
         mFlagImageViews = new ImageView[]{findViewById(R.id.advancedlevel_image_flag_1),
-                findViewById(R.id.advancedlevel_image_flag_2),
-                findViewById(R.id.advancedlevel_image_flag_3)};
+                findViewById(R.id.advancedlevel_image_flag_2), findViewById(R.id.advancedlevel_image_flag_3)};
         mTimerProgressBar = findViewById(R.id.advancedlevel_pb_timer);
         mTimerText = findViewById(R.id.advancedlevel_tv_timer);
-        mPointTally = findViewById(R.id.advancedlevel_tv_point_tally);
+        mPointTallyText = findViewById(R.id.advancedlevel_tv_point_tally);
 
-        gameController.setup();
+        mGameController.setup();
 
     }
 
+    /**
+     * Method which sets images of Flags
+     * @param flags - array of Drawable resources of flags
+     */
     public void setFlags(Drawable[] flags){
         for(int i=0; i<mFlagImageViews.length; i++){
             mFlagImageViews[i].setImageDrawable(flags[i]);
         }
     }
 
+    /**
+     * Method which extracts user's answers from Edit Text fields and sends to GameController
+     * to check answers.
+     */
     public void submitAnswers(){
         String[] answers = new String[3];
         for(int i=0; i<mInputFields.length; i++){
             answers[i] = mInputFields[i].getText().toString();
         }
-        gameController.checkAnswers(answers);
+        mGameController.checkAnswers(answers);
     }
 
+    /**
+     * Method which updates Input field state to indicate in green color if answer provided was correct or
+     * in red color if answer given was incorrect. State of all three flag Input fields are updated.
+     * @param isCorrectAnswerGiven - boolean array which corresponds to if the user has provided the correct
+     *                             answer to each Flag
+     */
     public void updateInputFieldState(boolean[] isCorrectAnswerGiven){
         for(int i=0; i<isCorrectAnswerGiven.length; i++){
             if(isCorrectAnswerGiven[i]){
@@ -73,9 +91,14 @@ public class AdvancedLevelActivity extends AppCompatActivity {
         }
     }
 
-    public void showResult(boolean[] areAllAnswersCorrect, String[] answers){
+    /**
+     * Method which displays result of game
+     * @param isCorrectAnswerGiven - boolean array which corresponds to if the user has provided the correct
+     *                                   answer to each Flag
+     */
+    public void showResult(boolean[] isCorrectAnswerGiven, String[] answers){
         for(int i=0; i< mInputFields.length; i++){
-            if(!areAllAnswersCorrect[i]){
+            if(!isCorrectAnswerGiven[i]){
                 mInputFields[i].setText(answers[i]);
                 mInputFields[i].setTextColor(getResources().
                         getColor(R.color.colorPrimary));
@@ -83,22 +106,36 @@ public class AdvancedLevelActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * Method which updates the point tally in the game view
+     * @param points
+     */
     public void updatePoints(int points){
-        mPointTally.setText(String.format("Points: %d/3",points));
+        mPointTallyText.setText(String.format("Points: %d/3",points));
     }
 
+    /**
+     * Method used to display Timer to user
+     */
     public void showTimer(){
         mTimerProgressBar.setVisibility(View.VISIBLE);
         mTimerText.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * Method used to update Timer in the event of time elapsed
+     * @param timeElapsed
+     */
     public void updateTimer(int timeElapsed){
         mTimerText.setText(
                 String.format("TIME LEFT: %ds",10 - timeElapsed));
         mTimerProgressBar.setProgress((int)((timeElapsed/10.0)*100.0));
     }
 
+    /**
+     * Method used to toggle submit button, when user has completed the current game mode instance
+     * and wishes to try advanced level for a new set of flags
+     */
     public void toggleSubmitButton(){
         switch (mSubmitButton.getText().toString()){
             case "Submit":
@@ -115,6 +152,9 @@ public class AdvancedLevelActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method used to clear input given by user on Edit Text field
+     */
     private void clearInputFields(){
         for(EditText textField: mInputFields){
             textField.getText().clear();

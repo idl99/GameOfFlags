@@ -13,17 +13,24 @@ import com.ihandilnath.gameofflags.guesshints.GuessHintsActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    /**
+     * Android Lifecycle callback invoked when activity is first created
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
 
+    /**
+     * Method which navigates to user selected game mode.
+     * Invoked on click event of game mode buttons.
+     * @param view
+     */
     public void startGameMode(View view) {
 
         Switch mSwitchTimer = findViewById(R.id.switch_timer);
-
         int selectedGameMode = view.getId(); // Getting the ID of the button corresponding
                                             // to the game mode selected by the user
 
@@ -32,24 +39,25 @@ public class MainActivity extends AppCompatActivity {
         switch(selectedGameMode){
             // Checking which button user clicked on
             case R.id.button_guess_country:
-                // User wishes to start Guess the Country game mode
+                // User wishes to enter "Guess the Country" game mode
                 intent = new Intent(this, GuessCountryActivity.class);
                 break;
             case R.id.button_guess_hints:
-                // User wishes to start Guess Hints game mode
+                // User wishes to enter "Guess Hints" game mode
                 intent = new Intent(this, GuessHintsActivity.class);
                 break;
             case R.id.button_guess_flag:
-                // User wishes to start Guess the Flag game mode
+                // User wishes to enter "Guess the Flag" game mode
                 intent = new Intent(this, GuessFlagActivity.class);
                 break;
             case R.id.button_advanced_level:
-                // User wishes to start Advanced level game mode
+                // User wishes to enter "Advanced level" game mode
                 intent = new Intent(this, AdvancedLevelActivity.class);
                 break;
         }
 
-        intent.putExtra("timer", mSwitchTimer.isChecked());
+        intent.putExtra("timer", mSwitchTimer.isChecked()); // Pass extra indicating if user
+                                                                // has requested for timer
         startActivity(intent);
 
     }

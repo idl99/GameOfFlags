@@ -16,43 +16,59 @@ import com.ihandilnath.gameofflags.R;
 
 import java.util.List;
 
+/**
+ * Activity class for Guess Country game mode which encapsulates logic related to manipulating
+ * the view.
+ */
 public class GuessCountryActivity extends AppCompatActivity {
 
-    private GuessCountryController gameController;
+    private GuessCountryController mGameController;
     private Spinner mCountrySpinner;
     private ProgressBar mTimerProgressBar;
     private TextView mTimerText;
     private Button mSubmitButton;
-    private TextView mTvResult;
-    private TextView mTvAnswer;
+    private TextView mResultText;
+    private TextView mAnswerText;
 
+    /**
+     * Android Lifecycle callback invoked when activity is first created
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guess_country);
 
-        gameController = new GuessCountryController(this, getIntent().getExtras().getBoolean("timer"));
+        mGameController = new GuessCountryController(this, getIntent().getExtras().getBoolean("timer"));
 
-        // Creating required references to UI elements
+        // Creating references to UI elements
         mTimerProgressBar = findViewById(R.id.guesscountry_pb_timer);
         mTimerText = findViewById(R.id.guesscountry_tv_timer);
         mSubmitButton = findViewById(R.id.guesscountry_button_submit);
-        mTvResult = findViewById(R.id.guesscountry_tv_result);
-        mTvAnswer = findViewById(R.id.guesscountry_tv_correct_answer);
+        mResultText = findViewById(R.id.guesscountry_tv_result);
+        mAnswerText = findViewById(R.id.guesscountry_tv_correct_answer);
         mSubmitButton.setOnClickListener(view -> submitAnswer());
 
-        gameController.setup();
+        mGameController.setup();
 
     }
 
-    // UI methods
+    /**
+     * Method which sets Flag image
+     * @param flag - Drawable resource of respective flag
+     */
     public void setFlag(Drawable flag) {
         ImageView mFlagImageView = findViewById(R.id.guesscountry_image_flag);
         mFlagImageView.setImageDrawable(flag);
         mFlagImageView.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * Method which populates values for the dropdown spinner which contains a list of all country names
+     * from which the user will select the answer to submit.
+     * @param countries
+     */
     public void populateCountries(List<String> countries) {
         mCountrySpinner = findViewById(R.id.guesscountry_spinner_countries);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
@@ -61,27 +77,43 @@ public class GuessCountryActivity extends AppCompatActivity {
         mCountrySpinner.setAdapter(adapter);
     }
 
+    /**
+     * Method used to display Timer to user
+     */
     public void showTimer(){
         mTimerProgressBar.setVisibility(View.VISIBLE);
         mTimerText.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * Method which extract the answer given by the user and passes it to the controller
+     * to check.
+     */
     public void submitAnswer(){
         String answer = ((String)mCountrySpinner.getSelectedItem());
-        gameController.checkAnswer(answer);
+        mGameController.checkAnswer(answer);
     }
 
-    public void showResult(boolean isAnswerCorrect, String answer){
-        if(isAnswerCorrect){
-            mTvResult.setText("Your answer is correct");
-            mTvResult.setTextColor(getResources().getColor(android.R.color.holo_green_light));
+    /**
+     * Method which displays result of game instance
+     * @param isCorrect - is the answer given by user correct
+     * @param answer - the correct answer
+     */
+    public void showResult(boolean isCorrect, String answer){
+        if(isCorrect){
+            mResultText.setText("Your answer is correct");
+            mResultText.setTextColor(getResources().getColor(android.R.color.holo_green_light));
         }else{
-            mTvResult.setText("Your answer is wrong");
-            mTvResult.setTextColor(getResources().getColor(android.R.color.holo_red_light));
-            mTvAnswer.setText("Correct answer is "+answer);
+            mResultText.setText("Your answer is wrong");
+            mResultText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+            mAnswerText.setText("Correct answer is "+answer);
         }
     }
 
+    /**
+     * Method used to toggle submit button, when user has completed the current game mode instance
+     * and wishes to try guessing the country for a new flag
+     */
     public void toggleSubmitButton(){
         switch (mSubmitButton.getText().toString()){
             case "Submit":
@@ -96,6 +128,10 @@ public class GuessCountryActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method used to update Timer in the event of time elapsed
+     * @param timeElapsed
+     */
     public void updateTimer(int timeElapsed) {
         mTimerText.setText(String.format("TIME LEFT: %ds",10 - timeElapsed));
         mTimerProgressBar.setProgress((int)((timeElapsed/10.0)*100.0));

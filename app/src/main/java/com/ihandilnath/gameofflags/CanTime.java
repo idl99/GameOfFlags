@@ -1,11 +1,19 @@
 package com.ihandilnath.gameofflags;
 
+/**
+ * Interface declaring contract for all Game Controllers of game modes for which Timer can be activated
+ */
 public interface CanTime {
 
-    // Method to execute when timer has expired
-    void onTimeExpired();
-
-    // Method to execute when time has elapsed (updating UI)
+    /**
+     * Callback method when time has elapsed, to update UI
+     * @param timeElapsed
+     */
     void onTimeElapsed(int timeElapsed);
+
+    /**
+     * Callback method to submit answer when time expires
+     */
+    void onTimeExpired();
 
 }

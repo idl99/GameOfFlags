@@ -9,90 +9,118 @@ import org.json.JSONException;
 
 import java.io.IOException;
 
+/**
+ * Class assigned single responsibility of performing game logic and controlling the view
+ * for Guess Hints game mode
+ *
+ * Implements CanTime interface to provide methods implementing Timer behavior for
+ * Guess Hints game mode on user request
+ */
 public class GuessHintsController implements CanTime {
 
-    private final boolean isTimed;
-    private GameTimer gameTimer;
+    private final GuessHintsActivity mGameView; // Reference to view controlled by the Game Controller
+    private final boolean mIsTimed; // boolean value indicating if the user has requested for timer
+    private GameTimer mGameTimer; // Timer object to keep track of time
+    private CountryRepository mCountryRepository; // Reference to country repository which provides details of countries
+    // like their name and corresponding drawable resource for country flag image
+    private Country mRandomlySelectedCountry;
+    private String mUserGuess;
+    private int mAttemptsLeft;
 
-    private final GuessHintsActivity gameView;
-
-    private CountryRepository countryRepository;
-    private Country answer;
-
-    private String guessString;
-    private int guessesRemaining;
-
+    /**
+     * Controller constructor
+     * @param gameView
+     * @param isTimed
+     */
     public GuessHintsController(GuessHintsActivity gameView, boolean isTimed) {
-        this.gameView = gameView;
-        this.isTimed = isTimed;
+        this.mGameView = gameView;
+        this.mIsTimed = isTimed;
         try {
-            this.countryRepository = CountryRepository.getInstance(gameView);
+            this.mCountryRepository = CountryRepository.getInstance(gameView);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Implementing abstract onTimeExpired callback method declared in the CanTime interface
+     * for time expired event of Game Timer
+     */
+    @Override
+    public void onTimeExpired() {
+        mGameView.runOnUiThread(this::checkGuess);
+    }
+
+    /**
+     * Implementing abstract onTimeElapsed callback method declared in the CanTime interface
+     * for time elapsed event of Game Timer
+     * @param timeElapsed - time elapsed in number of seconds
+     */
+    @Override
+    public void onTimeElapsed(final int timeElapsed) {
+        mGameView.runOnUiThread(() -> mGameView.updateTimer(timeElapsed));
+    }
+
+    /**
+     * Method which sets up game logic and view for game instance
+     */
     public void setup(){
 
-        guessesRemaining = 3;
-        answer = countryRepository.getRandomCountry();
-        guessString = answer.getName().replaceAll("\\S","-");
+        mAttemptsLeft = 3;
+        mRandomlySelectedCountry = mCountryRepository.getRandomCountry();
+        mUserGuess = mRandomlySelectedCountry.getName().replaceAll("\\S","-");
 
-        gameView.setFlag(countryRepository.getFlagForCountry(answer));
-        gameView.setHint(guessString);
-        gameView.setGuessesRemaining(guessesRemaining);
+        mGameView.setFlag(mCountryRepository.getFlagForCountry(mRandomlySelectedCountry));
+        mGameView.setHint(mUserGuess);
+        mGameView.setGuessesRemaining(mAttemptsLeft);
 
-        if(isTimed){
-            gameView.showTimer();
-            gameTimer = new GameTimer(this);
-            gameTimer.startTimer();
+        if(mIsTimed){
+            mGameView.showTimer();
+            mGameTimer = new GameTimer(this);
+            mGameTimer.startTimer();
         }
 
     }
 
-    public void guess(){
+    /**
+     * Method which checks user guess
+     */
+    public void checkGuess(){
 
-        if(gameTimer != null){
-            gameTimer.stopTimer();
+        if(mGameTimer != null){
+            mGameTimer.stopTimer();
         }
 
-        char letter = gameView.getUserGuess();
-        char[] correct_answer =  answer.getName().toLowerCase().toCharArray();
+        char letter = mGameView.getUserGuess();
+        char[] correct_answer =  mRandomlySelectedCountry.getName().toLowerCase().toCharArray();
 
         boolean guessedCorrect = false;
         for(int i =0; i<correct_answer.length; i++){
-            if(correct_answer[i] == letter && guessString.toCharArray()[i]=='-'){
+            if(correct_answer[i] == letter && mUserGuess.toCharArray()[i]=='-'){
                 guessedCorrect = true;
-                StringBuilder sb = new StringBuilder(guessString);
+                StringBuilder sb = new StringBuilder(mUserGuess);
                 sb.setCharAt(i, letter);
-                guessString = sb.toString();
-                gameView.setHint(guessString);
+                mUserGuess = sb.toString();
+                mGameView.setHint(mUserGuess);
             }
         }
 
         if(!guessedCorrect){
-            guessesRemaining--;
-            gameView.setGuessesRemaining(guessesRemaining);
+            // User hasn't correctly guessed a letter
+            mAttemptsLeft--;
+            mGameView.setGuessesRemaining(mAttemptsLeft);
         }
 
-        if(guessString.equals(answer.getName().toLowerCase()) || guessesRemaining == 0){
-            gameView.toggleSubmitButton();
-            gameView.showResult(guessString.equals(answer.getName().toLowerCase()), answer.getName());
+        if(mUserGuess.equals(mRandomlySelectedCountry.getName().toLowerCase()) || mAttemptsLeft == 0){
+            // User has solved the hints and provided answer or run out of attempts
+            mGameView.toggleSubmitButton();
+            mGameView.showResult(mUserGuess.equals(mRandomlySelectedCountry.getName().toLowerCase()), mRandomlySelectedCountry.getName());
         } else {
-            gameTimer = new GameTimer(this);
-            gameTimer.startTimer();
+            // Reinitialize timer for next user guess
+            mGameTimer = new GameTimer(this);
+            mGameTimer.startTimer();
         }
 
-    }
-
-    @Override
-    public void onTimeExpired() {
-        gameView.runOnUiThread(this::guess);
-    }
-
-    @Override
-    public void onTimeElapsed(final int timeElapsed) {
-        gameView.runOnUiThread(() -> gameView.updateTimer(timeElapsed));
     }
 
 }
