@@ -16,7 +16,7 @@
         <activity android:name=".advancedlevel.AdvancedLevelActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".GuessCountryActivity"
+        <activity android:name=".guesscountry.GuessCountryActivity"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".guesshints.GuessHintsActivity"
