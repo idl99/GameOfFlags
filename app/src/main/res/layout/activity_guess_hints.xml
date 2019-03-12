@@ -35,7 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:gravity="center"
-                    android:text="TIME LEFT: 10s"
+                    android:text="@string/initial_timer_text"
                     android:textColor="@android:color/black"
                     android:textStyle="bold"
                     android:visibility="invisible" />
@@ -85,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Your Guess: " />
+                    android:text="@string/guesshint_label_text" />
 
                 <EditText
                     android:id="@+id/guesshint_et_guess"
@@ -96,6 +96,7 @@
                     android:maxLength="1"
                     android:minEms="1"
                     android:autofillHints="" />
+
             </LinearLayout>
 
             <Button

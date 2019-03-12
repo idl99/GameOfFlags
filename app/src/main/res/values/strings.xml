@@ -16,4 +16,9 @@
     <string name="hint_enter_country_name">Enter name of Country</string>
     <string name="guess_hint">Guess Hint</string>
     <string name="initial_points_indicator">Points: 0/3</string>
+    <string name="flag_3">Flag 3</string>
+    <string name="flag_2">Flag 2</string>
+    <string name="flag_1">Flag 1</string>
+    <string name="initial_timer_text">TIME LEFT: 10s</string>
+    <string name="guesshint_label_text">Your Guess:</string>
 </resources>

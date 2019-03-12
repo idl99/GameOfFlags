@@ -8,7 +8,6 @@
     android:orientation="vertical"
     tools:context=".guessflag.GuessFlagActivity">
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,7 +38,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:gravity="center"
-                    android:text="TIME LEFT: 10s"
+                    android:text="@string/initial_timer_text"
                     android:textColor="@android:color/black"
                     android:textStyle="bold"
                     android:visibility="invisible" />
@@ -76,7 +75,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="flagClicked"
-                app:srcCompat="@drawable/lk" />
+                app:srcCompat="@drawable/lk"
+                android:contentDescription="@string/flag_1" />
 
             <ImageView
                 android:id="@+id/guessflag_imageview_flag2"
@@ -84,7 +84,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="flagClicked"
-                app:srcCompat="@drawable/lk" />
+                app:srcCompat="@drawable/lk"
+                android:contentDescription="@string/flag_2" />
 
             <ImageView
                 android:id="@+id/guessflag_imageview_flag3"
@@ -92,7 +93,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="flagClicked"
-                app:srcCompat="@drawable/lk" />
+                app:srcCompat="@drawable/lk"
+                android:contentDescription="@string/flag_3" />
 
             <Button
                 android:id="@+id/guessflag_next"
@@ -103,7 +105,7 @@
                 android:text="@string/next" />
 
         </LinearLayout>
-    </ScrollView>
 
+    </ScrollView>
 
 </RelativeLayout>
