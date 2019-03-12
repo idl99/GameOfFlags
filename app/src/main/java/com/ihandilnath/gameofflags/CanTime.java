@@ -1,6 +1,6 @@
 package com.ihandilnath.gameofflags;
 
-public interface TimeableMode {
+public interface CanTime {
 
     // Method to execute when timer has expired
     void onTimeExpired();

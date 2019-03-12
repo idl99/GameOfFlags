@@ -3,13 +3,13 @@ package com.ihandilnath.gameofflags.guesscountry;
 import com.ihandilnath.gameofflags.Country;
 import com.ihandilnath.gameofflags.CountryRepository;
 import com.ihandilnath.gameofflags.GameTimer;
-import com.ihandilnath.gameofflags.TimeableMode;
+import com.ihandilnath.gameofflags.CanTime;
 
 import org.json.JSONException;
 
 import java.io.IOException;
 
-public class GuessCountryController implements TimeableMode {
+public class GuessCountryController implements CanTime {
 
     private GuessCountryActivity gameView;
     private boolean isTimed;

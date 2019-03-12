@@ -6,18 +6,18 @@ import java.util.TimerTask;
 public class GameTimer extends Timer {
 
     private int timeElapsed;
-    private TimeableMode subscriber;
+    private CanTime subscriber;
 
-    public GameTimer(TimeableMode tm){
+    public GameTimer(CanTime tm){
         super();
         subscriber = tm;
     }
 
-    public TimeableMode getSubscriber() {
+    public CanTime getSubscriber() {
         return subscriber;
     }
 
-    public void setSubscriber(TimeableMode subscriber) {
+    public void setSubscriber(CanTime subscriber) {
         this.subscriber = subscriber;
     }
 

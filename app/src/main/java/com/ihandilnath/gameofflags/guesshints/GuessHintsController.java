@@ -3,13 +3,13 @@ package com.ihandilnath.gameofflags.guesshints;
 import com.ihandilnath.gameofflags.Country;
 import com.ihandilnath.gameofflags.CountryRepository;
 import com.ihandilnath.gameofflags.GameTimer;
-import com.ihandilnath.gameofflags.TimeableMode;
+import com.ihandilnath.gameofflags.CanTime;
 
 import org.json.JSONException;
 
 import java.io.IOException;
 
-public class GuessHintsController implements TimeableMode {
+public class GuessHintsController implements CanTime {
 
     private final boolean isTimed;
     private GameTimer gameTimer;

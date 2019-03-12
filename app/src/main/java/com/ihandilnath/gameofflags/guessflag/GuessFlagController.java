@@ -5,14 +5,14 @@ import android.graphics.drawable.Drawable;
 import com.ihandilnath.gameofflags.Country;
 import com.ihandilnath.gameofflags.CountryRepository;
 import com.ihandilnath.gameofflags.GameTimer;
-import com.ihandilnath.gameofflags.TimeableMode;
+import com.ihandilnath.gameofflags.CanTime;
 
 import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.Random;
 
-public class GuessFlagController implements TimeableMode {
+public class GuessFlagController implements CanTime {
 
     private final boolean isTimed;
     private GameTimer gameTimer;
