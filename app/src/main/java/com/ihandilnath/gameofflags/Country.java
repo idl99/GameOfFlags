@@ -2,7 +2,7 @@ package com.ihandilnath.gameofflags;
 
 import java.io.Serializable;
 
-public class Country implements Serializable {
+public class Country implements Serializable, Comparable<Country> {
 
     private String shortCode;
     private String name;
@@ -31,6 +31,11 @@ public class Country implements Serializable {
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj) || this.name.equalsIgnoreCase(((Country)obj).getName());
+    }
+
+    @Override
+    public int compareTo(Country country) {
+        return this.getName().compareTo(country.getName());
     }
 
     public static String[] getCountryNamesAsArray(Country[] countries){

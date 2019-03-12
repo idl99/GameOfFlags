@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -34,12 +35,12 @@ public class CountryRepository {
         is.close();
 
         // Processing input buffer to extract json data
-        String jsonString = new String(buffer, "UTF-8");
-        JSONObject jsonObject = new JSONObject(jsonString);
-        Iterator<String> keys = jsonObject.keys();
+        String rawText = new String(buffer, "UTF-8");
+        JSONObject json = new JSONObject(rawText);
+        Iterator<String> keys = json.keys();
         while(keys.hasNext()){
             String key = keys.next();
-            countries.add(new Country(key, jsonObject.getString(key)));
+            countries.add(new Country(key, json.getString(key)));
         }
     }
 
@@ -59,15 +60,8 @@ public class CountryRepository {
         for(Country country: countries){
             countryNames.add(country.getName());
         }
+        Collections.sort(countryNames);
         return countryNames;
-    }
-
-    public Country getCountryByName(String countryName){
-        for(Country country: countries){
-            if (country.getName().equals(countryName))
-                return country;
-        }
-        return null;
     }
 
     public Country getRandomCountry(){
