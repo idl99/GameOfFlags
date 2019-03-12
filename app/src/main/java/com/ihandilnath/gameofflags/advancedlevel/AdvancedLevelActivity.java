@@ -34,6 +34,7 @@ public class AdvancedLevelActivity extends AppCompatActivity {
         mInputFields = new EditText[]{findViewById(R.id.advancedlevel_et_input1),
                 findViewById(R.id.advancedlevel_et_input2),
                 findViewById(R.id.advancedlevel_et_input3)};
+
         mSubmitButton = findViewById(R.id.advancedlevel_button_submit);
         mSubmitButton.setOnClickListener(view -> submitAnswers());
         mFlagImageViews = new ImageView[]{findViewById(R.id.advancedlevel_image_flag_1),
@@ -102,12 +103,21 @@ public class AdvancedLevelActivity extends AppCompatActivity {
         switch (mSubmitButton.getText().toString()){
             case "Submit":
                 mSubmitButton.setText("Next");
-                mSubmitButton.setOnClickListener(view -> recreate());
+                mSubmitButton.setOnClickListener(view -> {
+                    clearInputFields();
+                    recreate();
+                });
                 break;
             case "Next":
                 mSubmitButton.setText("Submit");
                 mSubmitButton.setOnClickListener(view -> submitAnswers());
                 break;
+        }
+    }
+
+    private void clearInputFields(){
+        for(EditText textField: mInputFields){
+            textField.getText().clear();
         }
     }
 
