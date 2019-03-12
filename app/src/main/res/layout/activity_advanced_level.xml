@@ -70,7 +70,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/hint_enter_country_name"
-                android:inputType="text" />
+                android:inputType="text"
+                android:autofillHints="" />
 
             <ImageView
                 android:id="@+id/advancedlevel_image_flag_2"
@@ -85,7 +86,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/hint_enter_country_name"
-                android:inputType="text" />
+                android:inputType="text"
+                android:autofillHints="" />
 
             <ImageView
                 android:id="@+id/advancedlevel_image_flag_3"
@@ -100,7 +102,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/hint_enter_country_name"
-                android:inputType="text" />
+                android:inputType="text"
+                android:autofillHints="" />
 
             <Button
                 android:id="@+id/advancedlevel_button_submit"
