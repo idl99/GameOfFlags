@@ -101,10 +101,10 @@ public class GuessCountryActivity extends AppCompatActivity {
      */
     public void showResult(boolean isCorrect, String answer){
         if(isCorrect){
-            mResultText.setText("Your answer is correct");
+            mResultText.setText("CORRECT!");
             mResultText.setTextColor(getResources().getColor(android.R.color.holo_green_light));
         }else{
-            mResultText.setText("Your answer is wrong");
+            mResultText.setText("WRONG!");
             mResultText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
             mAnswerText.setText("Correct answer is "+answer);
         }
